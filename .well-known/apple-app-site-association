@@ -4,7 +4,7 @@
     "details": [
       {
         "appID": "3P3JJMN96G.com.localchat.mobile",
-        "paths": ["/reset-password/*"]
+        "paths": ["*", "/?roomId=*"]
       }
     ]
   }
