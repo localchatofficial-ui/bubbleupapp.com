@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "TU7L9X2R5W.com.localchat.mobile",
+        "paths": ["/reset-password/*"]
+      }
+    ]
+  }
+}
