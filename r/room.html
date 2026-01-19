@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- iOS Smart App Banner -->
+    <meta name="apple-itunes-app" content="app-id=6757682265, app-argument=https://bubbleupapp.com/r/ROOM_ID_PLACEHOLDER">
+    
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Join this room on BubbleUp">
+    <meta property="og:description" content="Connect with people nearby on BubbleUp - local conversations in real-time">
+    <meta property="og:image" content="https://bubbleupapp.com/og-image.png">
+    <meta property="og:url" content="https://bubbleupapp.com/r/ROOM_ID_PLACEHOLDER">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Join this room on BubbleUp">
+    <meta name="twitter:description" content="Connect with people nearby on BubbleUp">
+    <meta name="twitter:image" content="https://bubbleupapp.com/og-image.png">
+    
+    <title>Join Room - BubbleUp</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            margin: 20px auto;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .app-store-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .app-store-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .info {
+            margin-top: 30px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">💬</div>
+        <h1>Join this room on BubbleUp</h1>
+        <p>Opening the app...</p>
+        <div class="spinner"></div>
+        <a href="https://apps.apple.com/app/bubbleup-connect-nearby/id6757682265" class="app-store-button">
+            Download on App Store
+        </a>
+        <p class="info">
+            If the app doesn't open automatically, tap the button above to download BubbleUp
+        </p>
+    </div>
+    
+    <script>
+        // Extract room ID from URL
+        const pathParts = window.location.pathname.split('/');
+        const roomId = pathParts[pathParts.length - 1].replace('.html', '');
+        
+        // Try to open app via Universal Link (iOS will handle this automatically)
+        // If app is installed, iOS will intercept and open the app
+        // If not, this page will continue to load
+        
+        // Fallback: Try custom scheme as backup
+        const appUrl = `bubbleup://r/${roomId}`;
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = appUrl;
+        document.body.appendChild(iframe);
+        
+        // Auto-redirect to App Store after 2.5 seconds if app didn't open
+        let redirectTimer = setTimeout(() => {
+            // Check if page is still visible (if hidden, app likely opened)
+            if (!document.hidden) {
+                window.location.href = 'https://apps.apple.com/app/bubbleup-connect-nearby/id6757682265';
+            }
+        }, 2500);
+        
+        // Cancel redirect if page becomes hidden (app opened)
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                clearTimeout(redirectTimer);
+            }
+        });
+        
+        // Update meta tag with actual room ID
+        const metaTag = document.querySelector('meta[name="apple-itunes-app"]');
+        if (metaTag && roomId) {
+            metaTag.content = `app-id=6757682265, app-argument=https://bubbleupapp.com/r/${roomId}`;
+        }
+    </script>
+</body>
+</html>
