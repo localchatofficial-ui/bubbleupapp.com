@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - BubbleUp</title>
+    <meta name="description"
+        content="Get help with BubbleUp. Find answers to common questions, troubleshooting tips, and contact support.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6410;
+            --primary-light: #FF8C42;
+            --dark: #0f172a;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-600: #475569;
+            --gray-900: #0f172a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-900);
+            background: var(--gray-50);
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 3rem 0;
+        }
+
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--gray-900);
+        }
+
+        .section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--gray-900);
+        }
+
+        .section p {
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1.5rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-answer {
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-card {
+            background: var(--gray-50);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.1rem;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .contact-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 100, 16, 0.3);
+        }
+
+        .footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer p {
+            opacity: 0.6;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo-section">
+                <div class="logo">💬</div>
+                <div class="logo-text">BubbleUp</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>How can we help?</h1>
+            <p>Find answers to common questions or get in touch with our support team</p>
+        </div>
+    </section>
+
+    <main class="content">
+        <div class="container">
+            <!-- Getting Started -->
+            <div class="section">
+                <h2>Getting Started</h2>
+                <div class="faq-item">
+                    <div class="faq-question">What is BubbleUp?</div>
+                    <div class="faq-answer">
+                        BubbleUp is a location-based chat app that lets you discover and join real-time conversations
+                        happening around you or anywhere in the world. Drop a pin on our interactive map and connect
+                        with people in that location instantly.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do I create a room?</div>
+                    <div class="faq-answer">
+                        Tap the "+" button on the map or discovery screen, choose a location, select a category, add a
+                        title and description, and tap "Create Room". Your room will appear on the map for others to
+                        discover and join.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I join rooms anonymously?</div>
+                    <div class="faq-answer">
+                        Yes! You can join any room anonymously without creating an account. However, creating a profile
+                        lets you manage your rooms, follow favorites, and build your community presence.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account & Privacy -->
+            <div class="section">
+                <h2>Account & Privacy</h2>
+                <div class="faq-item">
+                    <div class="faq-question">How do I delete my account?</div>
+                    <div class="faq-answer">
+                        Go to Settings → Account → Delete Account. This will permanently remove your profile, messages,
+                        and all associated data. This action cannot be undone.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is my location shared with other users?</div>
+                    <div class="faq-answer">
+                        No. We only use your location to show you nearby rooms. Your exact location is never shared with
+                        other users. Room creators choose a general location for their room, and participants see that
+                        location, not yours.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do I report inappropriate content?</div>
+                    <div class="faq-answer">
+                        Long-press any message to report it, or use the room menu to report the entire room. Our team
+                        reviews all reports and takes action within 24 hours.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Troubleshooting -->
+            <div class="section">
+                <h2>Troubleshooting</h2>
+                <div class="faq-item">
+                    <div class="faq-question">The app won't load rooms near me</div>
+                    <div class="faq-answer">
+                        Make sure you've granted location permissions in your device settings. Go to Settings → BubbleUp
+                        → Location and select "While Using the App". If the issue persists, try restarting the app.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Messages aren't sending</div>
+                    <div class="faq-answer">
+                        Check your internet connection. BubbleUp requires an active internet connection for real-time
+                        messaging. If you're connected but still having issues, try closing and reopening the room.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">I can't join a room</div>
+                    <div class="faq-answer">
+                        The room may be full or closed by its creator. Some rooms have participant limits. If you were
+                        previously kicked or banned from a room, you won't be able to rejoin.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Support -->
+            <div class="section">
+                <h2>Contact Support</h2>
+                <p>Can't find what you're looking for? Our support team is here to help.</p>
+
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">📧</div>
+                        <h3>Email Support</h3>
+                        <a href="mailto:support@bubbleupapp.com">support@bubbleupapp.com</a>
+                        <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--gray-600);">Response within 24
+                            hours</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">💬</div>
+                        <h3>Community</h3>
+                        <a href="https://bubbleupapp.com">Join our community room</a>
+                        <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--gray-600);">Get help from other
+                            users</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="https://apps.apple.com/app/bubbleup-connect-nearby/id6757682265" class="btn">Download
+                        BubbleUp</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/support">Support</a>
+            </div>
+            <p>&copy; 2024 BubbleUp. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
