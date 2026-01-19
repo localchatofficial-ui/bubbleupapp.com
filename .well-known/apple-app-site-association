@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "TEAM_ID.com.localchat.mobile",
+        "appID": "3P3JJMN96G.com.localchat.mobile",
         "paths": ["/r/*", "/*"]
       }
     ]
