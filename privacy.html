@@ -181,7 +181,7 @@
             </div>
             <div class="date-row">
                 <span class="date-label">Last Updated:</span>
-                <span class="date-value">January 17, 2026</span>
+                <span class="date-value">January 19, 2026</span>
             </div>
         </div>
 
@@ -223,17 +223,25 @@
             </ul>
 
             <h3 class="subheading">Location Data</h3>
+            <p class="paragraph">We use your location to provide BubbleUp's core features:</p>
+
             <ul class="bullet-list">
-                <li>Your GPS coordinates are used <span class="bold">only</span> to discover nearby chat rooms and
-                    display your approximate position on the map</li>
-                <li><span class="bold">Geohash Area Privacy</span>: precise location data is converted to a regional
-                    "grid ID" (Geohash) directly on your device before transmission.</li>
-                <li><span class="bold">Raw GPS Never Sent</span>: Our servers never receive, store, or process your
-                    exact coordinates. We only know which ~1km grid cell you are in.</li>
-                <li><span class="bold">Deterministic Snapping</span>: Whether you use GPS or specialized selection, all
-                    locations are snapped to this pre-defined grid.</li>
-                <li>Other users see only room markers on the map—they cannot see your personal GPS coordinates</li>
+                <li><span class="bold">Room Discovery:</span> Your GPS coordinates are sent to our servers to find chat
+                    rooms near you. This is necessary for the app to function.</li>
+                <li><span class="bold">Joining Rooms:</span> Your coordinates are sent when you join a room to verify
+                    you are within the room's radius.</li>
+                <li><span class="bold">Room Creation Privacy:</span> When you <span class="bold">create a room</span>,
+                    your exact location is snapped to a ~1km grid on your device before being sent to our servers. This
+                    protects your precise location.</li>
+                <li><span class="bold">What Others See:</span> Other users see only room markers on the map—they cannot
+                    see your personal GPS coordinates or your real-time location.</li>
             </ul>
+
+            <p class="paragraph"><span class="bold">Important:</span> Your personal GPS coordinates are used for
+                <span class="bold">real-time processing only</span> and are <span class="bold">not stored</span> in our
+                database. We do not keep a history of your location. Only room locations (which are grid-snapped) are
+                stored. We never share your location with other users.
+            </p>
 
             <h3 class="subheading">Usage Data</h3>
             <ul class="bullet-list">
@@ -256,6 +264,35 @@
                 <li>Google account ID or Apple User ID (to link your account)</li>
                 <li>Email address from Google or Apple (for account identification)</li>
                 <li>Full name from Apple (if provided on first login)</li>
+            </ul>
+
+            <h3 class="subheading">Advertising Data (Free Users Only)</h3>
+            <ul class="bullet-list">
+                <li><span class="bold">Advertising Identifier (IDFA on iOS)</span> - Used to show personalized ads and
+                    measure ad performance</li>
+                <li><span class="bold">Ad Interaction Data</span> - Which ads you view or click on</li>
+                <li><span class="bold">Device Information for Ads</span> - Device type, OS version, and app version for
+                    ad targeting</li>
+                <li><span class="bold">Location Data for Ads</span> - Your approximate location may be used for
+                    location-based advertising</li>
+            </ul>
+            <p class="paragraph">
+                <span class="bold">Third-Party Ad Networks:</span> We use Google AdMob to display advertisements in the
+                free version of our app.
+                AdMob and its advertising partners may collect device identifiers, IP address, app usage data, and
+                location data
+                for ad personalization and fraud prevention.
+            </p>
+            <p class="paragraph">
+                <span class="bold">Ad Personalization:</span>
+            </p>
+            <ul class="bullet-list">
+                <li>You can opt out of personalized ads through your device settings (iOS: Settings → Privacy & Security
+                    → Tracking)</li>
+                <li>You can manage ad preferences in the app (Profile → Privacy Preferences)</li>
+                <li>Premium (Pro) users do not see advertisements and no advertising data is collected</li>
+                <li>Learn more: <a href="https://policies.google.com/privacy" target="_blank"
+                        style="color: var(--brand-primary);">Google AdMob Privacy Policy</a></li>
             </ul>
         </div>
 
@@ -313,22 +350,36 @@
         <!-- 4. Data Retention -->
         <div class="section">
             <h2 class="section-title">4. Data Retention</h2>
-            <p class="paragraph">We retain your data as follows:</p>
+
+            <h3 class="subheading">Active Rooms</h3>
+            <p class="paragraph">Room data and messages are stored while the room is active (1 hour to 7 days depending
+                on room duration).</p>
+
+            <h3 class="subheading">Expired Rooms</h3>
             <ul class="bullet-list">
-                <li><span class="bold">Rooms</span> - Automatically expire and become inaccessible 1-24 hours after
-                    creation (based on room duration)</li>
-                <li><span class="bold">Messages</span> - Become inaccessible when the room expires; message data is
-                    archived for moderation and legal compliance</li>
-                <li><span class="bold">Account data</span> - Kept until you delete your account</li>
-                <li><span class="bold">Session tokens</span> - Expire automatically and are cleared on logout</li>
-                <li><span class="bold">Location</span> - Your exact location is never stored; room locations are
-                    anonymized to a 1km area centroid and archived when rooms expire</li>
+                <li>When a room expires, it becomes inaccessible to all users</li>
+                <li>Room data and messages are <span class="bold">archived</span> (not immediately deleted)</li>
+                <li>Archived data may be retained for moderation, legal compliance, and analytics</li>
+                <li>Archived data is not accessible to users or displayed in the app</li>
+                <li>Archived room data is retained until you request deletion by contacting support</li>
             </ul>
-            <p class="paragraph">
-                When you delete your account, your data is marked for deletion immediately.
-                Personal data is permanently erased from our systems within 30 days,
-                except where retention is required by law for legal compliance.
-            </p>
+
+            <h3 class="subheading">Account Deletion</h3>
+            <ul class="bullet-list">
+                <li>If you delete your account, your profile data is removed immediately</li>
+                <li>Messages you sent in rooms remain for moderation purposes</li>
+                <li>You can request full data deletion by contacting support</li>
+            </ul>
+
+            <h3 class="subheading">Data Retention Periods</h3>
+            <ul class="bullet-list">
+                <li><span class="bold">Active room data</span> - Duration of room (1 hour to 7 days)</li>
+                <li><span class="bold">Archived room data</span> - Retained until deletion requested</li>
+                <li><span class="bold">Account data</span> - Until account deletion</li>
+                <li><span class="bold">Session tokens</span> - Expire automatically and are cleared on logout</li>
+                <li><span class="bold">Location data</span> - Your exact location is never stored; room locations are
+                    anonymized to a 1km area centroid</li>
+            </ul>
         </div>
 
         <!-- 5. Your Rights -->
