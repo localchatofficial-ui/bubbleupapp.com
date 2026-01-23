@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BubbleUp | Connect Your World</title>
+    <meta name="description"
+        content="Connect with your neighborhood in real-time. Discover local rooms, join conversations, and build your community with BubbleUp.">
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <!-- Google Fonts: Inter and Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #FF6410;
+            --primary-light: #FF8F50;
+            --primary-dark: #cc500d;
+            --secondary: #6366f1;
+            /* More premium indigo */
+            --accent: #f43f5e;
+            --bg-canvas: #0f172a;
+            /* Sophisticated Midnight Navy */
+            --bg-surface: rgba(30, 41, 59, 0.5);
+            --text-primary: #ffffff;
+            --text-secondary: #cbd5e1;
+            /* Brighter secondary text */
+            --text-tertiary: #94a3b8;
+            --glass: rgba(15, 23, 42, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --border-subtle: rgba(255, 255, 255, 0.05);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --mesh-1: rgba(255, 100, 16, 0.15);
+            --mesh-2: rgba(99, 102, 241, 0.1);
+            --mesh-3: rgba(244, 63, 94, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base Reveal Animation */
+        @keyframes reveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            animation: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-canvas);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+        }
+
+        /* Mesh Gradient Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 0% 0%, var(--mesh-1) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, var(--mesh-2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, var(--mesh-3) 0%, transparent 50%);
+            z-index: -1;
+            filter: blur(100px);
+            animation: meshFlow 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes meshFlow {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+
+            100% {
+                transform: scale(1.1) translate(20px, 20px);
+            }
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+
+        header .container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            transition: transform 0.2s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                gap: 20px;
+                padding-right: 8px;
+            }
+        }
+
+        .btn-download-small {
+            background-color: var(--primary);
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 99px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 100, 16, 0.2);
+        }
+
+        .btn-download-small:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 100, 16, 0.3);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding-top: 200px;
+            padding-bottom: 120px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 100, 16, 0.1) 0%, rgba(255, 100, 16, 0) 70%);
+            z-index: -1;
+            filter: blur(60px);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, rgba(37, 99, 235, 0) 70%);
+            z-index: -1;
+            filter: blur(60px);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(40px, 5vw, 64px);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, #ff8f50 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            color: #ffffff;
+            /* Pure white for max visibility */
+            margin-bottom: 40px;
+            max-width: 500px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            font-weight: 500;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-download {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: #fff;
+            color: #000;
+            padding: 14px 28px;
+            border-radius: 18px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+            background-color: #fff;
+        }
+
+        .hero-image {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 40px;
+            box-shadow: var(--shadow-xl);
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: rotateY(-5deg) rotateX(5deg);
+        }
+
+        .hero-image:hover img {
+            transform: rotateY(0) rotateX(0) scale(1.05);
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 24px;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            color: white;
+            animation: float 4s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        .badge-1 {
+            top: 10%;
+            left: -10%;
+        }
+
+        .badge-2 {
+            bottom: 15%;
+            right: -5%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* --- Features Section --- */
+        .features {
+            padding: 100px 0;
+            background-color: transparent;
+            /* Allow mesh gradient to show through */
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 100, 16, 0.2);
+        }
+
+        .section-header p {
+            color: #94a3b8;
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-card {
+            padding: 48px;
+            border-radius: 40px;
+            background: var(--bg-surface);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-icon {
+            width: 72px;
+            height: 72px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(-5deg) scale(1.1);
+            background: var(--primary);
+            color: white;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 80px 0 40px;
+            background-color: #111827;
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        .footer-brand p {
+            color: #9ca3af;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: white;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul a {
+            text-decoration: none;
+            color: #9ca3af;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 968px) {
+            header {
+                height: 70px;
+            }
+
+            .hero {
+                padding-top: 120px;
+                padding-bottom: 60px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+
+            .hero-content h1 {
+                font-size: 48px;
+            }
+
+            .hero-content p {
+                margin: 0 auto 32px;
+            }
+
+            .download-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                order: -1;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .badge-1 {
+                left: 0;
+            }
+
+            .badge-2 {
+                right: 0;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links .btn-download-small {
+                display: none;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-brand {
+                text-align: center;
+            }
+
+            .footer-brand .logo {
+                justify-content: center;
+            }
+
+            .footer-brand p {
+                margin: 0 auto;
+            }
+
+            .footer-col {
+                text-align: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="BubbleUp Logo">
+                BubbleUp
+            </a>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="support.html">Support</a>
+                <a href="https://apps.apple.com/app/6757682265" class="btn-download-small">Download</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1>Connect with your <span>Neighborhood</span> in Real-time.</h1>
+                        <p>Discover local rooms, join vibrant conversations, and stay updated with everything happening
+                            right where you are.</p>
+                        <div class="download-buttons">
+                            <a href="https://apps.apple.com/app/6757682265" class="btn-download">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"
+                                    style="margin-top: -4px;">
+                                    <path
+                                        d="M18.71 19.5c-.83 1.24-1.71 2.45-3.1 2.48-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .76-3.27.82-1.31.05-2.31-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.36 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                                </svg>
+                                App Store
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="hero_visual.png" alt="BubbleUp App Interface">
+                        <div class="floating-badge badge-1">
+                            📍 Nearby Rooms
+                        </div>
+                        <div class="floating-badge badge-2">
+                            💬 Real-time Chat
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Everything Local, Simplified.</h2>
+                    <p>BubbleUp is designed to bring communities together through real-time discovery and interaction.
+                    </p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Local Discovery</h3>
+                        <p>See what's happening around you. Find rooms for events, study groups, or neighborhood news
+                            within meters of your location.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Instant Access</h3>
+                        <p>No waiting. Join active rooms instantly and start chatting with people nearby. Conversations
+                            are live and dynamic.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Privacy First</h3>
+                        <p>Your location is used only to show you nearby content. We use snapping and privacy zones to
+                            keep your exact position secure.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <img src="logo.png" alt="BubbleUp Logo">
+                        BubbleUp
+                    </a>
+                    <p style="color: var(--text-secondary);">Building the world's most hyper-local social network, one
+                        bubble at a time.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="support.html">Support</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Safety</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BubbleUp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation Logic
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Apply reveal class to sections and cards
+        document.querySelectorAll('section, .feature-card, .hero-content, .hero-image').forEach(el => {
+            el.classList.add('reveal-init'); // Pre-reveal state
+            observer.observe(el);
+        });
+
+        // Update header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(15, 23, 42, 0.9)';
+                header.style.borderBottomColor = 'rgba(255, 255, 255, 0.1)';
+            } else {
+                header.style.background = 'var(--glass)';
+                header.style.borderBottomColor = 'var(--border-subtle)';
+            }
+        });
+    </script>
+
+    <style>
+        /* Reveal Initialization State */
+        .reveal-init {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal-init.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered animation for feature cards */
+        .feature-card:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .feature-card:nth-child(2) {
+            transition-delay: 0.3s;
+        }
+
+        .feature-card:nth-child(3) {
+            transition-delay: 0.5s;
+        }
+    </style>
+
+</body>
+
+</html>
