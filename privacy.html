@@ -181,7 +181,7 @@
             </div>
             <div class="date-row">
                 <span class="date-label">Last Updated:</span>
-                <span class="date-value">January 23, 2026</span>
+                <span class="date-value">February 12, 2026</span>
             </div>
         </div>
 
@@ -223,24 +223,30 @@
             </ul>
 
             <h3 class="subheading">Location Data</h3>
-            <p class="paragraph">We use your location to provide BubbleUp's core features:</p>
+            <p class="paragraph">We use your location to provide BubbleUp's core features. <span class="bold">Your exact
+                    GPS coordinates never leave your device.</span> All location data is converted to a "Geohash" (an
+                approximate area identifier) on your device before being transmitted:</p>
 
             <ul class="bullet-list">
-                <li><span class="bold">Room Discovery:</span> Your GPS coordinates are sent to our servers to find chat
-                    rooms near you. This is necessary for the app to function.</li>
-                <li><span class="bold">Joining Rooms:</span> Your coordinates are sent when you join a room to verify
-                    you are within the room's radius.</li>
+                <li><span class="bold">Room Discovery:</span> Your location is converted to a Geohash (~5km area) on
+                    your device, and only this approximate identifier is sent to find rooms near you.</li>
+                <li><span class="bold">Joining Rooms:</span> Only your Geohash (~5km area) is sent when you join a room
+                    to verify you are within the general vicinity.</li>
                 <li><span class="bold">Room Creation Privacy:</span> When you <span class="bold">create a room</span>,
-                    your exact location is snapped to a ~1km grid on your device before being sent to our servers. This
-                    protects your precise location.</li>
+                    your location is converted to a Geohash on your device. Only an approximate identifier is sent to
+                    our servers—typically a ~5km area for nearby rooms or a ~1km grid for custom locations. Your exact
+                    coordinates are never transmitted.</li>
                 <li><span class="bold">What Others See:</span> Other users see only room markers on the map—they cannot
-                    see your personal GPS coordinates or your real-time location.</li>
+                    see your personal location or your real-time position.</li>
+                <li><span class="bold">Nearby Room Notifications:</span> To notify you about new rooms, we use a broader
+                    Geohash (representing a ~39km x 19km area). This ensures notifications reach you without revealing
+                    your precise location.</li>
             </ul>
 
-            <p class="paragraph"><span class="bold">Important:</span> Your personal GPS coordinates are used for
-                <span class="bold">real-time processing only</span> and are <span class="bold">not stored</span> in our
-                database. We do not keep a history of your location. Only room locations (which are grid-snapped) are
-                stored. We never share your location with other users.
+            <p class="paragraph"><span class="bold">Important:</span> Your exact GPS coordinates <span
+                    class="bold">never leave your device</span>. All location processing converts coordinates to Geohash
+                identifiers before transmission. We do not store precise coordinates—only approximate area identifiers
+                (~1km to ~5km cells) for rooms are stored. We never share your location with other users.
             </p>
 
             <h3 class="subheading">Usage Data</h3>
@@ -301,10 +307,12 @@
             <h2 class="section-title">2. How We Use Your Information</h2>
             <p class="paragraph">We use your information exclusively to provide and improve BubbleUp:</p>
             <ul class="bullet-list">
-                <li><span class="bold">Room Discovery</span> - Show you chat rooms near your location</li>
+                <li><span class="bold">Room Discovery</span> - Show you chat rooms near your approximate area (~5km
+                    Geohash)</li>
                 <li><span class="bold">Authentication</span> - Verify your identity and manage your session</li>
                 <li><span class="bold">Messaging</span> - Deliver your messages to room participants</li>
-                <li><span class="bold">Notifications</span> - Alert you about new messages (if enabled)</li>
+                <li><span class="bold">Notifications</span> - Alert you about new messages and new rooms created nearby
+                    (based on ~39km Geohash area)</li>
                 <li><span class="bold">Moderation</span> - Enforce community guidelines and handle reports</li>
                 <li><span class="bold">Account Recovery</span> - Help you regain access if needed</li>
             </ul>
@@ -384,8 +392,9 @@
                 <li><span class="bold">Archived room data</span> - Retained until deletion requested</li>
                 <li><span class="bold">Account data</span> - Until account deletion</li>
                 <li><span class="bold">Session tokens</span> - Expire automatically and are cleared on logout</li>
-                <li><span class="bold">Location data</span> - Your exact location is never stored; room locations are
-                    anonymized to a 1km area centroid</li>
+                <li><span class="bold">Location data</span> - Your exact coordinates never leave your device; room
+                    locations are
+                    stored as ~5km Geohash cells</li>
             </ul>
         </div>
 
@@ -402,6 +411,12 @@
                 <li><span class="bold">Notifications</span> - Toggle push notifications in Settings</li>
                 <li><span class="bold">Blocking</span> - Block users you don't want to interact with</li>
             </ul>
+            <p class="paragraph" style="margin-top: 16px;">
+                <span class="bold">Privacy-First Location Tracking:</span> Our system is designed so that your exact GPS
+                coordinates <span class="bold">never leave your device</span>. All location data is converted to a
+                Geohash on your device before transmission. For room operations, we use ~5km precision; for
+                notifications, ~39km precision. You can opt-out by disabling Location Permissions or Push Notifications.
+            </p>
         </div>
 
         <!-- 6. Data Security -->
