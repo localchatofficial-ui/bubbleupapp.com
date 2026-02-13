@@ -4,7 +4,17 @@
     "details": [
       {
         "appID": "3P3JJMN96G.com.localchat.mobile",
-        "paths": ["/r/*", "/*"]
+        "paths": ["/r/*", "/*"],
+        "components": [
+          {
+            "/": "/r/*",
+            "comment": "Open room links"
+          },
+          {
+            "/": "/*",
+            "comment": "Open all other links"
+          }
+        ]
       }
     ]
   }
