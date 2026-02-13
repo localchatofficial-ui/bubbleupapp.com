@@ -29,7 +29,8 @@
             --primary: #FF6410;
             --primary-light: #FF8C42;
             --white: #FFFFFF;
-            --bg-dark: #0f172a;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.3);
         }
 
         * {
@@ -40,7 +41,12 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-dark);
+            background: #0f172a;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(255, 100, 16, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(255, 140, 66, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(255, 100, 16, 0.1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(255, 140, 66, 0.1) 0px, transparent 50%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -50,6 +56,7 @@
             overflow: hidden;
         }
 
+        /* Animated background blob */
         .blob {
             position: absolute;
             width: 500px;
@@ -58,7 +65,7 @@
             filter: blur(80px);
             border-radius: 50%;
             z-index: -1;
-            opacity: 0.2;
+            opacity: 0.4;
             animation: move 20s infinite alternate;
         }
 
@@ -76,14 +83,26 @@
             text-align: center;
             width: 100%;
             max-width: 420px;
-            background: rgba(30, 41, 59, 0.95);
-            /* More solid background */
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border-radius: 32px;
             padding: 56px 40px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            z-index: 10;
+            border: 1px solid var(--glass-border);
+            animation: fadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .logo-container {
@@ -96,6 +115,24 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 10px 25px rgba(255, 100, 16, 0.3);
+            transform: rotate(-3deg);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-3deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+        }
+
+        .logo-text {
+            font-size: 50px;
         }
 
         h1 {
@@ -104,20 +141,20 @@
             font-weight: 800;
             letter-spacing: -0.5px;
             line-height: 1.2;
-            color: white;
         }
 
         p {
             font-size: 17px;
             margin-bottom: 40px;
-            opacity: 0.9;
+            opacity: 0.8;
             line-height: 1.5;
             font-weight: 400;
         }
 
         .spinner-container {
-            width: 48px;
-            height: 48px;
+            position: relative;
+            width: 64px;
+            height: 64px;
             margin: 0 auto 40px;
         }
 
@@ -130,6 +167,18 @@
             animation: spin 1s linear infinite;
         }
 
+        .spinner-inner {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-bottom-color: var(--primary-light);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite reverse;
+        }
+
         @keyframes spin {
             to {
                 transform: rotate(360deg);
@@ -140,35 +189,77 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--primary);
-            color: white;
+            background: var(--white);
+            color: #0f172a;
             padding: 18px 32px;
             border-radius: 20px;
             text-decoration: none;
             font-weight: 700;
             font-size: 17px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             width: 100%;
             margin-bottom: 24px;
         }
 
         .app-store-button:hover {
-            transform: translateY(-2px);
-            background: var(--primary-light);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            background: #f8fafc;
+        }
+
+        .app-store-button:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .app-store-button svg {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
         }
 
         .info {
             font-size: 14px;
-            opacity: 0.7;
+            opacity: 0.6;
+            line-height: 1.4;
             margin-bottom: 0;
         }
 
         .footer {
             margin-top: 48px;
-            font-size: 11px;
-            opacity: 0.5;
+            font-size: 12px;
+            opacity: 0.4;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
+        }
+
+        @media (max-height: 600px) {
+            .container {
+                padding: 32px 24px;
+            }
+
+            .logo-container {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 24px;
+            }
+
+            .logo-text {
+                font-size: 40px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            p {
+                margin-bottom: 24px;
+            }
+
+            .spinner-container {
+                margin-bottom: 24px;
+            }
         }
     </style>
 </head>
@@ -177,70 +268,64 @@
     <div class="blob"></div>
     <div class="container">
         <div class="logo-container">
-            <img src="/logo.png" alt="BubbleUp" style="width: 100%; height: 100%; border-radius: 20px;">
+            <img src="/logo.png" alt="BubbleUp Logo" style="width: 100%; height: 100%; border-radius: 20px;">
         </div>
-        <h1>Open this room in BUBBLEUP</h1>
+        <h1>Join this room on BubbleUp</h1>
         <p>Connecting you to the app...</p>
 
         <div class="spinner-container">
             <div class="spinner"></div>
+            <div class="spinner-inner"></div>
         </div>
 
-        <a href="https://apps.apple.com/app/bubbleup-connect-nearby/id6757682265" class="app-store-button"
-            id="mainButton">
-            OPEN IN BUBBLEUP
+        <a href="https://apps.apple.com/app/bubbleup-connect-nearby/id6757682265" class="app-store-button">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.1 2.48-1.34.03-1.77-.79-3.32-.79-1.54 0-2.02.78-3.31.82-1.34.04-2.31-1.32-3.15-2.52-1.71-2.46-3.02-6.95-1.26-10.02.87-1.52 2.43-2.48 4.14-2.51 1.3-.02 2.52.88 3.32.88.8 0 2.26-1.11 3.82-.95 1.73.07 3.01.69 3.84 1.9-3.41 1.96-2.86 6.8 1.02 8.35-.35 1.03-1 2.36-1.76 3.26zm-3.02-14.5c.73-.89 1.22-2.12 1.09-3.35-1.06.04-2.34.7-3.11 1.58-.69.79-1.3 2.05-1.14 3.23 1.18.09 2.37-.62 3.16-1.46z" />
+            </svg>
+            GET BUBBLEUP
         </a>
 
         <p class="info">
-            If it doesn't open, tap the button to continue.
+            If the app doesn't open automatically, tap the button to download from the App Store.
         </p>
 
         <div class="footer">BubbleUp • Local Conversations</div>
     </div>
 
     <script>
-        function getRoomId() {
-            const pathParts = window.location.pathname.split('/');
-            const lastPart = pathParts[pathParts.length - 1];
-            return lastPart.replace('.html', '') || 'discovery';
-        }
+        // Extract room ID from URL
+        const pathParts = window.location.pathname.split('/');
+        const roomId = pathParts[pathParts.length - 1].replace('.html', '');
 
-        const roomId = getRoomId();
+        // Try to open app via Universal Link / Custom Scheme
         const appUrl = `bubbleup://r/${roomId}`;
-        const appStoreUrl = 'https://apps.apple.com/app/bubbleup-connect-nearby/id6757682265';
 
-        // Update Smart App Banner
+        // Attempt to open via iframe for custom scheme fallback
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = appUrl;
+        document.body.appendChild(iframe);
+
+        // Auto-redirect to App Store after 3 seconds if app didn't open
+        let redirectTimer = setTimeout(() => {
+            if (!document.hidden) {
+                window.location.href = 'https://apps.apple.com/app/bubbleup-connect-nearby/id6757682265';
+            }
+        }, 3000);
+
+        // Cancel redirect if page becomes hidden (app opened)
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                clearTimeout(redirectTimer);
+            }
+        });
+
+        // Update meta tag with actual room ID
         const metaTag = document.querySelector('meta[name="apple-itunes-app"]');
-        if (metaTag) {
-            metaTag.content = `app-id=6757682265, app-argument=${appUrl}`;
+        if (metaTag && roomId && roomId !== 'ROOM_ID_PLACEHOLDER') {
+            metaTag.content = `app-id=6757682265, app-argument=https://bubbleupapp.com/r/${roomId}`;
         }
-
-        function redirect() {
-            // Attempt to open the app
-            window.location.href = appUrl;
-
-            // Fallback after 3 seconds
-            setTimeout(() => {
-                if (!document.hidden) {
-                    window.location.href = appStoreUrl;
-                }
-            }, 3000);
-        }
-
-        // Run once on load
-        window.onload = () => {
-            setTimeout(redirect, 600);
-        };
-
-        // Manual button logic
-        document.getElementById('mainButton').onclick = (e) => {
-            window.location.href = appUrl;
-            // Short delay before letting browser visit the href if app not installed
-            setTimeout(() => {
-                window.location.href = appStoreUrl;
-            }, 500);
-            e.preventDefault();
-        };
     </script>
 </body>
 
