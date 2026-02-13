@@ -295,36 +295,55 @@
 
     <script>
         // Extract room ID from URL
-        const pathParts = window.location.pathname.split('/');
-        const roomId = pathParts[pathParts.length - 1].replace('.html', '');
+        function getRoomId() {
+            const pathParts = window.location.pathname.split('/');
+            const lastPart = pathParts[pathParts.length - 1];
+            return lastPart.replace('.html', '');
+        }
 
-        // Try to open app via Universal Link / Custom Scheme
+        const roomId = getRoomId();
         const appUrl = `bubbleup://r/${roomId}`;
+        const appStoreUrl = 'https://apps.apple.com/app/bubbleup-connect-nearby/id6757682265';
 
-        // Attempt to open via iframe for custom scheme fallback
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = appUrl;
-        document.body.appendChild(iframe);
-
-        // Auto-redirect to App Store after 3 seconds if app didn't open
-        let redirectTimer = setTimeout(() => {
-            if (!document.hidden) {
-                window.location.href = 'https://apps.apple.com/app/bubbleup-connect-nearby/id6757682265';
-            }
-        }, 3000);
-
-        // Cancel redirect if page becomes hidden (app opened)
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                clearTimeout(redirectTimer);
-            }
-        });
-
-        // Update meta tag with actual room ID
+        // Update meta tag for Smart App Banner (uses deep link scheme now)
         const metaTag = document.querySelector('meta[name="apple-itunes-app"]');
         if (metaTag && roomId && roomId !== 'ROOM_ID_PLACEHOLDER') {
-            metaTag.content = `app-id=6757682265, app-argument=https://bubbleupapp.com/r/${roomId}`;
+            metaTag.content = `app-id=6757682265, app-argument=${appUrl}`;
+        }
+
+        // Auto-redirect logic
+        function tryOpenApp() {
+            // Modern Safari triggers app launch via location change
+            window.location.href = appUrl;
+
+            // Fallback to App Store after delay
+            setTimeout(() => {
+                if (!document.hidden) {
+                    window.location.href = appStoreUrl;
+                }
+            }, 3000);
+        }
+
+        // Run auto-redirect on load
+        window.addEventListener('load', () => {
+            setTimeout(tryOpenApp, 500);
+        });
+
+        // Add handler to the main button to explicitly try opening the app first
+        const mainButton = document.querySelector('.app-store-button');
+        if (mainButton) {
+            mainButton.addEventListener('click', (e) => {
+                // If they have the app, this should open it. 
+                // If not, it falls through to the default link behavior.
+                window.location.href = appUrl;
+
+                // We keep the default behavior too as a backup
+                setTimeout(() => {
+                    window.location.href = appStoreUrl;
+                }, 500);
+
+                e.preventDefault();
+            });
         }
     </script>
 </body>
