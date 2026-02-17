@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Open a BubbleUp room link in the app and join a nearby location-based conversation.">
+    <meta name="robots" content="noindex,follow">
+    <link rel="canonical" href="https://bubbleupapp.com/r/room.html">
 
     <!-- iOS Smart App Banner -->
     <meta name="apple-itunes-app"
@@ -325,6 +328,16 @@
         const metaTag = document.querySelector('meta[name="apple-itunes-app"]');
         if (metaTag && roomId && roomId !== 'ROOM_ID_PLACEHOLDER') {
             metaTag.content = `app-id=6757682265, app-argument=https://bubbleupapp.com/r/${roomId}`;
+        }
+
+        const canonicalLink = document.querySelector('link[rel="canonical"]');
+        if (canonicalLink && roomId && roomId !== 'ROOM_ID_PLACEHOLDER') {
+            canonicalLink.href = `https://bubbleupapp.com/r/${roomId}`;
+        }
+
+        const ogUrlTag = document.querySelector('meta[property="og:url"]');
+        if (ogUrlTag && roomId && roomId !== 'ROOM_ID_PLACEHOLDER') {
+            ogUrlTag.content = `https://bubbleupapp.com/r/${roomId}`;
         }
     </script>
 </body>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Allow: /.well-known/
+
+Sitemap: https://bubbleupapp.com/sitemap.xml

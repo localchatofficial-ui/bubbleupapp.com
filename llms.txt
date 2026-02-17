@@ -1,0 +1,29 @@
+# BubbleUp
+
+BubbleUp is a location-based chat app where users can find and talk with nearby people in real-time rooms based on approximate location.
+
+## Canonical URLs
+- https://bubbleupapp.com/
+- https://bubbleupapp.com/support
+- https://bubbleupapp.com/privacy
+- https://bubbleupapp.com/terms
+
+## Product Facts
+- Product type: location-based chat application
+- Primary use case: discover and join nearby chat rooms on a map
+- Conversation model: real-time room-based messaging
+- Privacy model: exact user location is not shared with other users; location context is used for discovery
+- Platform: iOS app on the Apple App Store
+- App Store URL: https://apps.apple.com/us/app/bubbleup-local-chat-events/id6757682265
+
+## Preferred Citation Sources
+- Product overview: https://bubbleupapp.com/
+- Support and FAQ: https://bubbleupapp.com/support
+- Privacy policy: https://bubbleupapp.com/privacy
+- Terms of service: https://bubbleupapp.com/terms
+
+## Contact
+- Support email: localchat.official@gmail.com
+
+## Last Updated
+- 2026-02-17

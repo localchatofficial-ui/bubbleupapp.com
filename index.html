@@ -4,10 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BubbleUp | Connect Your World</title>
+    <title>BubbleUp: Location-Based Chat App for Nearby Rooms</title>
     <meta name="description"
-        content="Connect with your neighborhood in real-time. Discover local rooms, join conversations, and build your community with BubbleUp.">
+        content="BubbleUp is a location-based chat app to find nearby chat rooms, join real-time local conversations, and discover what is happening around you on a map.">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+    <link rel="canonical" href="https://bubbleupapp.com/">
+    <meta property="og:site_name" content="BubbleUp">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BubbleUp: Location-Based Chat App for Nearby Rooms">
+    <meta property="og:description"
+        content="Find nearby chat rooms, join real-time local conversations, and discover events and neighborhoods on an interactive map.">
+    <meta property="og:url" content="https://bubbleupapp.com/">
+    <meta property="og:image" content="https://bubbleupapp.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BubbleUp: Location-Based Chat App for Nearby Rooms">
+    <meta name="twitter:description"
+        content="Discover nearby chat rooms and join real-time local conversations with map-based room discovery.">
+    <meta name="twitter:image" content="https://bubbleupapp.com/og-image.png">
+    <meta name="apple-itunes-app" content="app-id=6757682265">
     <link rel="icon" type="image/png" href="logo.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "BubbleUp",
+      "url": "https://bubbleupapp.com/",
+      "logo": "https://bubbleupapp.com/logo.png",
+      "sameAs": [
+        "https://apps.apple.com/us/app/bubbleup-local-chat-events/id6757682265"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "url": "https://bubbleupapp.com/",
+      "name": "BubbleUp",
+      "publisher": {
+        "@type": "Organization",
+        "name": "BubbleUp"
+      }
+    },
+    {
+      "@type": "MobileApplication",
+      "name": "BubbleUp: Local Chat & Events",
+      "operatingSystem": "iOS",
+      "applicationCategory": "SocialNetworkingApplication",
+      "url": "https://bubbleupapp.com/",
+      "downloadUrl": "https://apps.apple.com/us/app/bubbleup-local-chat-events/id6757682265",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Location-based chat app for nearby rooms and real-time local conversations.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "BubbleUp"
+      }
+    }
+  ]
+}
+    </script>
 
     <!-- Google Fonts: Inter and Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -361,6 +419,28 @@
             /* Allow mesh gradient to show through */
         }
 
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .faq-card {
+            padding: 32px;
+            border-radius: 32px;
+            background: var(--bg-surface);
+            border: 1px solid var(--glass-border);
+        }
+
+        .faq-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .faq-card p {
+            color: var(--text-secondary);
+        }
+
         .section-header {
             text-align: center;
             margin-bottom: 60px;
@@ -542,6 +622,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
             }
@@ -597,14 +681,16 @@
 
     <header>
         <div class="container">
-            <a href="#" class="logo">
+            <a href="/" class="logo">
                 <img src="logo.png" alt="BubbleUp Logo">
                 BubbleUp
             </a>
             <nav class="nav-links">
                 <a href="#features">Features</a>
-                <a href="support.html">Support</a>
-                <a href="https://apps.apple.com/app/6757682265" class="btn-download-small">Download</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="/support">Support</a>
+                <a href="https://apps.apple.com/us/app/bubbleup-local-chat-events/id6757682265"
+                    class="btn-download-small">Download</a>
             </nav>
         </div>
     </header>
@@ -614,29 +700,31 @@
             <div class="container">
                 <div class="hero-grid">
                     <div class="hero-content">
-                        <h1>Connect with your <span>Neighborhood</span> in Real-time.</h1>
-                        <p>Discover local rooms, join vibrant conversations, and stay updated with everything happening
-                            right where you are.</p>
+                        <h1>Location-Based Chat Rooms for <span>Nearby People</span>.</h1>
+                        <p>Find and join real-time conversations in nearby neighborhoods, events, and city areas.
+                            BubbleUp uses approximate location so you can discover local rooms without sharing your
+                            exact position.</p>
                         <div class="download-buttons">
-                            <a href="https://apps.apple.com/app/6757682265" class="btn-download">
+                            <a href="https://apps.apple.com/us/app/bubbleup-local-chat-events/id6757682265"
+                                class="btn-download">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"
                                     style="margin-top: -4px;">
                                     <path
                                         d="M18.71 19.5c-.83 1.24-1.71 2.45-3.1 2.48-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .76-3.27.82-1.31.05-2.31-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.36 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
                                 </svg>
-                                App Store
+                                Download on App Store
                             </a>
                         </div>
                     </div>
                     <div class="hero-image">
-                        <img src="hero_visual.png" alt="BubbleUp App Interface">
+                        <img src="hero_visual.png"
+                            alt="BubbleUp location-based chat map showing nearby rooms and local conversations">
                         <div class="floating-badge badge-1">
                             📍 Nearby Rooms
                         </div>
                         <div class="floating-badge badge-2">
                             💬 Real-time Chat
                         </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -644,28 +732,87 @@
         <section class="features" id="features">
             <div class="container">
                 <div class="section-header">
-                    <h2>Everything Local, Simplified.</h2>
-                    <p>BubbleUp is designed to bring communities together through real-time discovery and interaction.
+                    <h2>Find Local Conversations Fast.</h2>
+                    <p>BubbleUp helps you discover, join, and start location-based chat rooms in real time.
                     </p>
                 </div>
                 <div class="feature-grid">
                     <div class="feature-card">
                         <div class="feature-icon">🔍</div>
-                        <h3>Local Discovery</h3>
-                        <p>See what's happening around you. Find rooms for events, study groups, or neighborhood news
-                            within meters of your location.</p>
+                        <h3>Map-Based Room Discovery</h3>
+                        <p>Open the map to see nearby chat rooms and active local conversations around neighborhoods,
+                            campuses, venues, and events.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">⚡</div>
-                        <h3>Instant Access</h3>
-                        <p>No waiting. Join active rooms instantly and start chatting with people nearby. Conversations
-                            are live and dynamic.</p>
+                        <h3>Real-Time Messaging</h3>
+                        <p>Join rooms instantly and talk with people nearby while conversations are happening, not hours
+                            later in a feed.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🛡️</div>
-                        <h3>Privacy First</h3>
-                        <p>Your location is used only to show you nearby content. We use snapping and privacy zones to
-                            keep your exact position secure.</p>
+                        <h3>Approximate Location Privacy</h3>
+                        <p>Your exact location is not shared with other users. BubbleUp uses location context to match
+                            you with relevant nearby rooms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How BubbleUp Works</h2>
+                    <p>A simple flow to find and talk with nearby people in location-based chat rooms.</p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">1</div>
+                        <h3>Explore Nearby Areas</h3>
+                        <p>Browse the map to discover active rooms in your area or in places you want to explore.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">2</div>
+                        <h3>Join Live Rooms</h3>
+                        <p>Tap a room to enter instantly and chat with people currently active in that location.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">3</div>
+                        <h3>Create Local Rooms</h3>
+                        <p>Start a room for local news, events, or questions and let nearby users join the conversation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Common questions about nearby chat rooms, privacy, and location-based discovery.</p>
+                </div>
+                <div class="faq-grid">
+                    <article class="faq-card">
+                        <h3>Can I use BubbleUp anonymously?</h3>
+                        <p>Yes. You can join many rooms without creating a profile. Create an account if you want to
+                            manage rooms and preferences.</p>
+                    </article>
+                    <article class="faq-card">
+                        <h3>How does location privacy work?</h3>
+                        <p>BubbleUp uses approximate location context for room discovery. Your exact location is not
+                            shared with other users.</p>
+                    </article>
+                    <article class="faq-card">
+                        <h3>What can rooms be used for?</h3>
+                        <p>Rooms work well for neighborhood updates, local events, study groups, city tips, and live
+                            area-based discussions.</p>
+                    </article>
+                    <article class="faq-card">
+                        <h3>Need detailed support?</h3>
+                        <p>Read the full help center on the <a href="/support"
+                                style="color: var(--primary-light);">BubbleUp support page</a>.</p>
+                    </article>
                     </div>
                 </div>
             </div>
@@ -676,36 +823,39 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="logo">
+                    <a href="/" class="logo">
                         <img src="logo.png" alt="BubbleUp Logo">
                         BubbleUp
                     </a>
-                    <p style="color: var(--text-secondary);">Building the world's most hyper-local social network, one
-                        bubble at a time.</p>
+                    <p style="color: var(--text-secondary);">Location-based chat rooms for nearby conversations and
+                        real-time local discovery.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Product</h4>
                     <ul>
                         <li><a href="#features">Features</a></li>
-                        <li><a href="support.html">Support</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="/support">Support</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Company</h4>
+                    <h4>Resources</h4>
                     <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Safety</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="https://apps.apple.com/us/app/bubbleup-local-chat-events/id6757682265">App
+                                Store</a></li>
+                        <li><a href="r/room.html">Room Link Preview</a></li>
+                        <li><a href="mailto:localchat.official@gmail.com">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Follow Us</h4>
+                    <h4>Legal</h4>
                     <ul>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="/terms">Terms</a></li>
+                        <li><a href="/privacy">Privacy</a></li>
+                        <li><a href="/support">Support</a></li>
                     </ul>
                 </div>
             </div>
